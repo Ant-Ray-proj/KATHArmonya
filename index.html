@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Event Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="polish.css">
+</head>
+<body>
+<div class="stage-art" aria-hidden="true">
+  <img class="curtain curtain-left" src="media/BackgroundEraser_20261019_002654072.png" alt="">
+  <img class="curtain curtain-right" src="media/BackgroundEraser_20261019_002654072.png" alt="">
+</div>
+<main>
+  <header class="brand">
+    <img class="logo" src="media/BackgroundEraser_20261019_002037837.png" alt="KathArmonya theatre and literature logo">
+    <h1 id="eventName">KATHARMONYA</h1>
+    <p class="sub" id="eventDetails"></p>
+  </header>
+  <form class="card" id="form" novalidate>
+    <label for="name">Full name</label>
+    <input id="name" type="text" autocomplete="name" maxlength="100" required>
+
+    <label for="contact">Contact number</label>
+    <input id="contact" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="09123456789" required>
+    <span class="hint">Digits only, or with + for country code.</span>
+
+    <button class="full" id="submit" type="submit">Register</button>
+    <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
+  </form>
+  <p class="page-links"><a href="feedback.html">Share your event feedback</a></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script>
+const C = window.APP_CONFIG;
+document.title = C.EVENT_NAME + " – Registration";
+document.getElementById("eventName").textContent = C.EVENT_NAME;
+document.getElementById("eventDetails").textContent = C.EVENT_DETAILS || "";
+
+const db = supabase.createClient(C.SUPABASE_URL, C.SUPABASE_ANON_KEY);
+const form = document.getElementById("form"), msg = document.getElementById("msg"), btn = document.getElementById("submit");
+
+function show(text, type){ msg.textContent = text; msg.className = "msg " + type; }
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const contact = document.getElementById("contact").value.replace(/[\s-]/g, "");
+  if (name.length < 2) return show("Enter your full name.", "err");
+  if (!/^\+?\d{7,15}$/.test(contact)) return show("Enter a valid contact number (7–15 digits).", "err");
+
+  btn.disabled = true; btn.textContent = "Registering…";
+  const { error } = await db.from("registrations").insert({ name, contact_number: contact });
+  btn.disabled = false; btn.textContent = "Register";
+
+  if (error) {
+    if (error.code === "23505") return show("This contact number is already registered.", "err");
+    console.error(error);
+    return show("Registration failed. Check your connection and try again.", "err");
+  }
+  form.reset();
+  show("You're registered, " + name + ". See you at the event!", "ok");
+});
+</script>
+</body>
+</html>

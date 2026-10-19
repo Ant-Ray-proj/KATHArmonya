@@ -1,0 +1,73 @@
+/* ===== Typography & alignment polish ===== */
+html{font-size:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-size:1rem;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;font-kerning:normal}
+
+/* Headings */
+h1{font-weight:600;line-height:1.12;letter-spacing:.04em;text-align:center;text-wrap:balance}
+.brand{display:flex;flex-direction:column;align-items:center}
+.logo{margin:0 auto 10px}
+.sub{font-size:1rem;line-height:1.5;letter-spacing:.01em;text-align:center;text-wrap:balance;margin:.6rem auto 0;max-width:34em}
+.sub:empty{display:none}
+
+/* Form labels, inputs, hints */
+.card label{font-size:.95rem;font-weight:600;line-height:1.3;letter-spacing:.005em;margin:0 0 .4rem;text-align:left}
+.card label .opt,.card label span[style]{font-weight:400;color:#5C6881}
+.card input[type=text],.card input[type=tel],.card input[type=email],.card input[type=password],.card input[type=search],
+.feedback-card textarea,.feedback-card select{font-size:1rem;line-height:1.4;font-weight:400;padding:.8rem .95rem;margin-bottom:1.25rem}
+.card input::placeholder,.feedback-card textarea::placeholder{color:#8A93A8;opacity:1}
+.card .hint{font-size:.875rem;line-height:1.4;margin:-.85rem 0 1.25rem;text-align:left}
+
+/* Buttons */
+button,.btn{font-size:1rem;line-height:1.2;letter-spacing:.02em;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:.5em}
+button.full{display:flex;margin-top:.25rem}
+
+/* Messages */
+.msg{font-size:.95rem;line-height:1.45;text-align:left}
+
+/* Index: footer link */
+.page-links{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem 1.5rem;text-align:center;margin:20px auto;color:#fff;font-size:.95rem;line-height:1.5}
+.page-links a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.page-links a:hover{text-decoration-thickness:2px}
+
+/* Feedback page */
+.feedback-intro{font-size:1rem;line-height:1.55;text-wrap:balance;padding:0 8px}
+.feedback-card h2{font-size:1.4rem;line-height:1.2;letter-spacing:.02em;text-align:left;margin:0 0 .5rem}
+.feedback-card .lead{font-size:.95rem;line-height:1.5;margin:0 0 1.5rem}
+.card label.rating-option{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:.6rem;margin:0;font-weight:500;text-align:left}
+.rating-option input{margin:0}
+.rating-group{margin:.5rem 0 1.5rem}
+.feedback-intro{margin:.6rem auto 0}
+.rating-option strong{font-size:1rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.rating-option span{font-size:.9rem;font-weight:500;line-height:1.2}
+.feedback-card select{appearance:none;-webkit-appearance:none;padding-right:2.4rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%235C6881' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .95rem center}
+
+/* Admin */
+.top{align-items:flex-end}
+.top h1{text-align:left;letter-spacing:.03em}
+.top .sub{text-align:left;margin:.4rem 0 0;font-size:.95rem}
+.top>div:last-child{display:flex;gap:8px;flex-wrap:wrap}
+.top button{margin:0}
+.tabs button{font-size:.95rem;padding:.6rem 1.1rem}
+.bar input{font-size:1rem;line-height:1.4;padding:.75rem .95rem}
+table{font-size:.95rem;line-height:1.4;font-variant-numeric:tabular-nums}
+th{font-size:.8rem;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+th,td{vertical-align:middle;padding:12px 14px}
+th:first-child,td:first-child{width:3rem;text-align:right;color:#5C6881}
+th:last-child,td:last-child{text-align:right;width:1%;white-space:nowrap}
+td button{font-size:.875rem;padding:.45rem .85rem}
+.empty,td.empty{text-align:center!important;width:auto!important;white-space:normal!important;color:#5C6881!important}
+.rating-pill{font-size:.875rem;line-height:1.2}
+#loginView h1,#loginView .sub{text-align:center}
+#loginView .sub{margin:.6rem auto 1.5rem}
+.admin-card{padding:clamp(22px,4vw,32px)}
+
+@media (max-width:600px){
+  .rating-option:last-child{grid-column:1/-1}
+  .card label.rating-option{justify-content:flex-start}
+  h1{letter-spacing:.025em}
+  .sub{font-size:.95rem;padding:0 12px}
+  .feedback-card h2{font-size:1.25rem}
+  .top{align-items:flex-start}
+  th{font-size:.75rem}
+  th,td{padding:10px}
+}
